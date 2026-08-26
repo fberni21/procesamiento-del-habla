@@ -13,6 +13,8 @@ Se divide un segmento de audio en $T$ fragmentos, y de cada uno se extraen _feat
 
 En general debe cumplirse que $T >> K$, o sea quiero muchos más _frames_ que palabras.
 
+El bloque que muestrea y produce los _frames_ se llama procesador acústico.
+
 == Problemas típicos
 
 - ASR: _automatic speech recognition_.
@@ -23,7 +25,7 @@ En general debe cumplirse que $T >> K$, o sea quiero muchos más _frames_ que pa
 
 === _Automatic speech recognition_
 
-1. Procesador acústico: convierte la señal de entrada en una secuencia de _features acústicos_. Su salida es $underline(y)_(1:T)$.
+1. Procesador acústico: convierte la señal de entrada en una secuencia de _features acústicos_. Su salida es $underline(y)_(1:T)$. Cada $underline(y)_t in RR^D$.
 2. Decodificador de palabras: devuelve una predicción de la secuencia de palabras en función de los _features acústicos_. Su salida es $W_(1:K)$.
 
 Conceptualmente, el decodificador de palabras modela la probabilidad condicional de cada palabra dadas las _features acústicas_, $P(W_(1:K)=w_(1:K)|underline(Y)_(1:T) = underline(y)_(1:T))$. Cada una de las posibles secuencias de palabras que se corresponden con la señal se denota $W^((m))$, $m=1,dots,M$. Esto es en realidad poco práctico, pues requiere considerar todas las posibles combinaciones de palabras del diccionario.
@@ -32,7 +34,7 @@ Por Bayes:
 $ argmax_W P(W_(1:K)=w_(1:K)|underline(Y)_(1:T) = underline(y)_(1:T)) = argmax_W P(W_(1:K)=w_(1:K)) p(Y=y_(1:T)|W=w_(1:K)), $
 donde se descartó el denominador pues no afecta el argumento máximo.
 
-Al término $P(W_(1:K)=w_(1:K))$ se lo llama modelo de lenguage. Intuitivamente, describe qué tan frecuente es una secuencia de palabras en el lenguaje. El término $p(Y_(1:T)=y_(1:T) | W_(1:K)=w_(1:K))$ es el modelo acústico, que describe qué tan probable es obtener una secuencia de _features_ bajo la suposición de que se habló una secuencia de palabras.
+Al término $P(W_(1:K)=w_(1:K))$ se lo llama modelo de lenguage. Intuitivamente, describe qué tan frecuente es una secuencia de palabras en el lenguaje. El término $p(underline(Y)_(1:T)=underline(y)_(1:T) | W_(1:K)=w_(1:K))$ es el modelo acústico, que describe qué tan probable es obtener una secuencia de _features_ bajo la suposición de que se habló una secuencia de palabras.
 
 ==== Construcción del modelo del lenguaje
 
