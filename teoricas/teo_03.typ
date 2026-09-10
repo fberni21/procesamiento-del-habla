@@ -95,7 +95,7 @@ Con el espectro $S[k,t]$ para $k=0,dots,N_"FFT"/2$, $t = 1,dots,T$, las frecuenc
 La resolución en frecuencia es mala para bajas frecuencias, por lo que el banco de filtros buscará compensar esto.
 
 La conversión a mel desde las frecuencias es
-$ mel(f) = 2595 log_(10) (1 + f / 100), $
+$ mel(f) = 2595 log_(10) (1 + f / 700), $
 para $f$ expresada en Hz.
 
 #figure(
