@@ -44,7 +44,7 @@ Se consideran formantes $F_1, F_2, F_3, dots$, que son resonancias donde se ampl
 Excitación $e_c (t)$ pasa por un filtro $h_c (t)$ (el tracto vocal) y produce $x_c (t)$, la señal de habla observada. Matemáticamente
 $ x_c (t) = (e_c ast h_c)(t) = integral_(-infinity)^(infinity) e_c (tau) h_c (t - tau) "d"tau. $
 
-- Transformada de Fourier (DTFT):
+- Transformada de Fourier:
 $ E_c (Omega) = integral_(-infinity)^(infinity) e_c (t) e^(-j Omega t) "d"t arrow X_c (Omega) = E_c (Omega) H_c (Omega). $
 
 Se define $Omega_0 = 2 pi F_0$, la frecuencia angular de la frecuencia fundamental de la fuente del hablante.
@@ -65,7 +65,7 @@ $ X_O (e^(j omega)) = E_O (e^(j omega)) H_O (e^(j omega)), $
 con $omega in RR$, $[omega] = "rad"/"s"$, $pi lt.eq omega lt pi$, $omega = Omega / f_s$.
 
 - Transformada discreta de Fourier:
-$ E[k] = sum_(n=0)^(N-1) e^(-j omega_k n), $
+$ E[k] = sum_(n=0)^(N-1) e[n] e^(-j omega_k n), $
 con $omega_k = (2 pi k) / N$, con $k = 0, dots, N - 1$. Es decir, se tiene igual cantidad de muestras en frecuencia que en tiempo.
 
 === Modelo fuente-filtro sin ventaneo

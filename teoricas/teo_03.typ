@@ -121,7 +121,7 @@ Luego, se toma logaritmo para obtener $tilde(E)_m [t] = log(E_m [t] + epsilon)$,
 == DCT (Discrete Cosine Transform)
 
 La entrada de la DCT es un vector $underline(tilde(E))_t = vec(tilde(E)_1 [t] space dots.c space tilde(E)_M [t])^T$.
-Definimos $phi_d [m] = cos(pi d (2 m - 1) / (2 M))$, con $d$ el _índice cepstral_.
+Definimos $phi_d [m] = cos(pi d (2 m + 1) / (2 M))$, con $d$ el _índice cepstral_.
 
 *Definición:* DCT.
 $ c_d [t] = sum_(m=1)^M tilde(E)_m [t] phi_d [m] = <underline(tilde(E))_t, underline(phi)_d>, $
