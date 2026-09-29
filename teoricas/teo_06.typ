@@ -1,6 +1,6 @@
 #let argmax = math.op("argmáx", limits: true)
 
-= Teórica 7
+= Teórica 6
 
 == Repaso
 
@@ -11,8 +11,8 @@
 === Ejemplo
 
 $ Q_t = cases(
-  1 "región fricativa" arrow.long "/f/, /s/, /x/",
-  2 "región vocálica",
+  1 ", región fricativa" arrow.long "/f/, /s/, /x/," \/integral\/,
+  2 ", región vocálica",
 ), $
 $ underline(pi) = mat(1; 0), A = mat(0.6, 0.4; 0, 1). $
 
@@ -48,9 +48,9 @@ $ p(underline(y)_(1:3) | lambda) = sum_(i=1)^2 alpha_3 (i) = 0.0072 + 0.1186 = 0
 
 ==== Backward
 
-$ beta_t (i) = p()$
+$ beta_t (i) = p(underline(y)_(t+1:T) | Q_t = i, lambda). $
 
-$ beta_T (i) = 1, beta_t (i) = sum_(j=1)^N a_(i j) b_j (underline(y)_(t+1) beta_(t+1) (j). $
+$ beta_T (i) = 1, beta_t (i) = sum_(j=1)^N a_(i j) b_j (underline(y)_(t+1)) beta_(t+1) (j). $
 
 *Valores finales:*
 
@@ -66,22 +66,27 @@ $ beta_1 (1) = 0.2512, beta_1 (2) = 0.4. $
 
 $ gamma_t (i) = P(Q_t = i | underline(y)_(1:3), lambda) = (alpha_t (i) beta_t (i)) / p(underline(y)_(1:3) | lambda). $
 
-// t, gamma t 1, gamma t 2
-// 1, 1, 0
-// 2, 0.363, 0.637
-// 3, 0.057, 0.943
+#align(center)[
+  #table(
+    columns: 3,
+    [t], [$gamma_t (1)$], [$gamma_t (2)$],
+    [1], [1], [0],
+    [2], [0.363], [0.637],
+    [3], [0.057], [0.943],
+  )
+]
 
 == Filtrado vs. suavizado
 
 === Suavizado
 
 La probabilidad de un estado conociendo _todas_ las observaciones.
-$ P(Q_t = i | underline(y)_(1:T) = gamma_t (i). $
+$ P(Q_t = i | underline(y)_(1:T)) = gamma_t (i). $
 
 === Filtrado
 
 La probabilidad de un estado en el tiempo $t$ conociendo _únicamente_ las observaciones hasta ese instante $t$. Es causal.
-$ P(Q_t = j | underline(y)_(1:t) = (alpha_t (j)) / (sum_(i=1)^N alpha_t (i)). $
+$ P(Q_t = j | underline(y)_(1:t)) = (alpha_t (j)) / (sum_(i=1)^N alpha_t (i)). $
 
 *Ejemplo:*
 $ P(Q_2 = 1 | underline(y)_(1:2), lambda) = p(Q_2 = 1, underline(y)_(1:2) | lambda) / p(underline(y)_(1:2) | lambda)
@@ -163,7 +168,7 @@ Se calcula $omega_(j m)$ y se reemplaza en el paso M sin mezcla $gamma_t (j)$ po
 // I -> 1 -> 2 -> 3 -> ... -> N
 
 $ pi = mat(1, 0, 0, dots.c, 0)^T in RR^N, $
-$ A = mat(a_11, a_12, 0, dots.c, 0; , a_22, a_23, dots.c, 0; , , , , dots.v ; , 0, , a_(N N-1), a_(N N);  , , , ,  a_(N N)). $
+$ A = mat(a_11, a_12, 0, dots.c, 0; , a_22, a_23, dots.c, 0; , , , dots.down, dots.v ; , , , a_(N N-1), a_(N N); 0, , , ,  a_(N N)). $
 
 Las transiciones directas representan avance temporal. Los bucles representan duración.
 Los saltos opcionales corresponden a hablar rápido o saltearse sonidos.
@@ -181,6 +186,8 @@ La esperanza de $D_i$, que representa la cantidad esperada de frames de permanen
 //  (1) casa ---- modelo de palabra ---> /k/, /a/, /s/, /a/ -----> 3 estados por fonema
 //  (2) HMM: en qué orden y cuánto tiempo
 
-- Para un vocabulario pequeño, tenemos $lambda_("casa"), lambda_("cama"), dots$.
-- Dados los features $underline(y)_(1:T)$ de una grabación, uso forward para obtener $p(underline(y)_(1:T) | lambda_w) forall w in cal(W)$.
+- Para un vocabulario pequeño, tenemos $lambda_("casa"), lambda_("cama"), dots$
+- Dados los features $underline(y)_(1:T)$ de una grabación, uso forward para obtener $p(underline(y)_(1:T) | lambda_w), forall w in cal(W)$.
 - Elegir $hat(w) = argmax_(w in cal(W)) p(underline(y)_(1:T) | lambda_w) P(W=w)$.
+
+// vim: lbr wrap
