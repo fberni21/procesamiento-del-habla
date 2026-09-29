@@ -16,3 +16,5 @@
 #include "teo_02.typ"
 #include "teo_03.typ"
 #include "teo_04.typ"
+#include "teo_05.typ"
+#include "teo_06.typ"
